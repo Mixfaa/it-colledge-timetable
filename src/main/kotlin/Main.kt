@@ -60,59 +60,67 @@ fun main() {
     val htmlFile = FileWriter("timetable.html")
 
     htmlFile.appendHTML().html {
-        body {
+        head {
+            meta(name = "viewport", content = "width=device-width, initial-scale=1")
+            meta(charset = "utf-8")
+            link(
+                href = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css",
+                rel = "stylesheet"
+            )
             style {
                 text(
                     """
                         body {
-                            background: black;
+                        background: radial-gradient(circle at center, #1a1f25, #30404d);
+                        font-family: 'Comic Sans MS', cursive, sans-serif;
+                        font-size: 20px;
+                        color: #ffffff;
                         }
-                        * {
-                            font-family: ${"Lucida Console"}, ${"Courier New"}, monospace;
-                            font-size: 18px;
-                            color: white;
-                            margin-left: auto;
-                            margin-right: auto;
+                        table {
+                        table-layout: fixed; 
                         }
-                        summary {
-                            text-align: center;
-                        }
-                        table, th, td {
-                              border:1px solid gray;
-                              margin-top: 2em;
-                              margin-bottom: 2em;
+                        .table-bordered {
+                        border-top-right-radius: 15px;
+                        border-top-left-radius: 15px;
                         }
                     """
                 )
             }
+        }
+        body {
+
 
             val currentWeek = Calendar.getInstance().get(Calendar.WEEK_OF_YEAR)
 
-            timetable.groupBy {
-                val calendar = Calendar.getInstance()
-                calendar.time = it.date
-                calendar.get(Calendar.WEEK_OF_YEAR)
-            }.forEach { (week, timetables) ->
-                details {
-                    summary {
-                        if (week == currentWeek)
-                            text("${simpleTimeFormat.format(timetables.first().date)} ($week) (current week)")
-                        else
-                            text("${simpleTimeFormat.format(timetables.first().date)} ($week)")
-                    }
-                    timetables.forEach { timetableDay ->
-                        table {
-                            caption {
+            div(classes = "container-md text-center") {
+
+                timetable.groupBy {
+                    val calendar = Calendar.getInstance()
+                    calendar.time = it.date
+                    calendar.get(Calendar.WEEK_OF_YEAR)
+                }.forEach { (week, timetables) ->
+                    details {
+                        summary {
+                            if (week == currentWeek)
+                                text("${simpleTimeFormat.format(timetables.first().date)} ($week) (current week)")
+                            else
+                                text("${simpleTimeFormat.format(timetables.first().date)} ($week)")
+                        }
+                        timetables.forEach { timetableDay ->
+                            a(classes = "text-info") {
                                 text(simpleTimeFormat.format(timetableDay.date))
                             }
-                            tbody {
-                                timetableDay.lessons.forEach { lesson ->
-                                    tr {
-                                        td {
-                                            text(lesson.title)
-                                        }
-                                        td {
-                                            text(lesson.other)
+                            table(classes = "table table-dark table-hover table-md mx-auto w-auto table-bordered border-success") {
+
+                                tbody {
+                                    timetableDay.lessons.forEach { lesson ->
+                                        tr {
+                                            td {
+                                                text(lesson.title)
+                                            }
+                                            td {
+                                                text(lesson.other)
+                                            }
                                         }
                                     }
                                 }

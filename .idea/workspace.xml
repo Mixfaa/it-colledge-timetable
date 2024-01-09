@@ -57,6 +57,9 @@
       </state>
     </system>
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -67,6 +70,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Gradle.Build it-colledge-timetable.executor": "Run",
     "Gradle.Build it-college-parser.executor": "Run",
     "Gradle.it-college-parser [build].executor": "Run",
     "Gradle.it-college-parser [clean].executor": "Run",
@@ -84,7 +88,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Programing/kmp-native-wizard"
+    "last_opened_file_path": "C:/Programing/java_kotlin/it-colledge-timetable"
   }
 }]]></component>
   <component name="RecentsManager">
